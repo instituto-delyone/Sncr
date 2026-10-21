@@ -6,7 +6,7 @@
 
 O **SNCRbr** é um portal web próprio, desenvolvido e gerenciado pelo **Instituto Delyone de Medicina e Tecnologia**. Ele terá uma aplicação e um ciclo de evolução separados do portal institucional e do MedUnity, com foco na experiência de acesso e nos fluxos de integração relacionados a receituários controlados.
 
-O nome **SNCRbr** é uma referência/homenagem à finalidade do projeto. O portal é independente e **não deve ser apresentado como produto oficial, mantido, endossado ou homologado pela Anvisa ou pelo Governo Federal**, salvo se houver autorização ou reconhecimento formal documentado.
+O nome **SNCRbr** é uma referência/homenagem à finalidade do projeto. O portal é independente e **não deve ser apresentado como produto oficial, mantido, endossado ou homologado pela Anvisa ou pelo Governo Federal**, salvo se houver autorização ou reconhecimento formal documentado. o que segundo a Anvisa em ligação formal para com o presidente do instituto , não é necessário a aprovação do órgão para páginas ou empresas devidamente registradas para emitir receituários controlados, basta a correta integração com a api
 
 O repositório GitHub é público e separado:
 - Repositório: [instituto-delyone/Sncr](https://github.com/instituto-delyone/Sncr)
