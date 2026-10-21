@@ -1,0 +1,65 @@
+manifest:
+  id: "MANIFESTO_AUTORIA_INTEGRIDADE_SNCRBR_MEDUNITY_2026-10-21"
+  version: "1.0.0"
+  language: "pt-BR"
+  created_at: "2026-10-21"
+  document_type: "Manifesto de autoria, proveniência e integridade criptográfica"
+  subject:
+    title: "Esquema de integração MedUnity → SNCRbr → API oficial SNCR"
+    artifact_filename: "MC_SNCRBR_MEDUNITY_INTEGRATION_NEXT_PHASE_2026-10-21.yaml"
+    artifact_type: "Memory Card em YAML"
+    artifact_version: "1.0.0"
+  authorship_declaration:
+    declared_author: "Dr. Delyone de Paula Canedo Filho"
+    role: "Idealizador e responsável pela concepção arquitetural e pelas decisões de projeto declaradas"
+    organization: "Instituto Delyone de Medicina e Tecnologia"
+    declaration: >
+      Declara-se, para fins de registro documental de autoria e proveniência, que o
+      esquema arquitetural descrito no artefato identificado neste manifesto é
+      atribuído ao Dr. Delyone de Paula Canedo Filho, no âmbito do trabalho de
+      concepção do fluxo de integração entre MedUnity, portal SNCRbr e API oficial
+      do SNCR. A organização do texto e a formalização deste registro contaram com
+      assistência de inteligência artificial, sob orientação do responsável
+      declarado. Esta declaração registra a atribuição informada pelo declarante;
+      não constitui, por si só, certificação independente de autoria, anterioridade,
+      titularidade exclusiva ou reconhecimento jurídico por terceiros.
+    scope_of_claim:
+      - "Estruturação do fluxo em fases e suas dependências."
+      - "Separação conceitual entre autenticação MedUnity e autenticação oficial SNCR/Gov.br."
+      - "Diretrizes de transferência mínima e segura de contexto."
+      - "Fluxo proposto de solicitação, validação da numeração oficial e apresentação da receita."
+      - "Critérios de segurança, aceitação e continuidade registrados no Memory Card."
+    exclusions:
+      - "O manifesto não reivindica autoria sobre a API oficial, o SNCR, o Gov.br, a documentação da Anvisa ou componentes de terceiros."
+      - "O hash comprova a correspondência com os bytes do arquivo identificado, não prova sozinho quem o criou nem quando foi criado."
+  integrity:
+    algorithm: "SHA-256"
+    hash_format: "hexadecimal lowercase"
+    artifact_sha256: "98cdddaa5e2a7d39fd2018e17cc18f696cb8110227044487552e02d691415b40"
+    artifact_size_bytes: 13735
+    hashing_method: "SHA-256 calculado sobre os bytes exatos do arquivo YAML, sem conversão de quebras de linha."
+    verification_command:
+      linux_macos: "sha256sum MC_SNCRBR_MEDUNITY_INTEGRATION_NEXT_PHASE_2026-10-21.yaml"
+      powershell: "Get-FileHash .\\MC_SNCRBR_MEDUNITY_INTEGRATION_NEXT_PHASE_2026-10-21.yaml -Algorithm SHA256"
+  provenance:
+    source_artifact: "MC_SNCRBR_MEDUNITY_INTEGRATION_NEXT_PHASE_2026-10-21.yaml"
+    source_artifact_sha256: "98cdddaa5e2a7d39fd2018e17cc18f696cb8110227044487552e02d691415b40"
+    created_from:
+      - "Plano arquitetural definido na conversa de 2026-10-21."
+      - "Manual da API SNCR, 3ª edição, setembro de 2026, fornecido no projeto."
+    note: >
+      A referência ao manual documenta a base técnica consultada e não implica
+      endosso, aprovação ou vínculo oficial da Anvisa com o portal SNCRbr.
+  change_control:
+    rule: >
+      Qualquer alteração nos bytes do artefato modifica seu SHA-256. Após cada
+      alteração, recalcular o hash e emitir uma nova versão deste manifesto.
+    recommended_practice:
+      - "Guardar juntos o Memory Card original e este manifesto."
+      - "Preservar versões anteriores em histórico controlado."
+      - "Para evidência de data e autoria perante terceiros, considerar assinatura digital qualificada ou serviço de carimbo do tempo confiável."
+  declaration:
+    place: "Goiânia, Goiás, Brasil"
+    date: "2026-10-21"
+    declarant: "Dr. Delyone de Paula Canedo Filho"
+    signature_status: "Campo de declaração documental; não assinado digitalmente neste arquivo."
