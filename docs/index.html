@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b36">
+<meta name="description" content="Módulo de prescrição integrado ao MedUnity — Instituto Delyone de Medicina e Tecnologia.">
+<title>Prescrição | Instituto Delyone</title>
+<style>
+:root{--navy:#101b36;--navy2:#1b2d50;--teal:#24b8ad;--ink:#17243b;--muted:#68768b;--line:#e2e8f0;--paper:#f4f7fb;--white:#fff;--gold:#a86d17}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+.top{background:var(--navy);color:#fff;padding:18px 22px}.topinner{max-width:1100px;margin:auto;display:flex;align-items:center;gap:13px}.mark{height:42px;width:42px;border:1px solid #43516c;border-radius:13px;display:grid;place-items:center;color:var(--teal);font-weight:850}.brand{font-size:14px;font-weight:750;letter-spacing:.02em}.brand small{display:block;color:#b5c2d6;font-size:12px;font-weight:500}.topright{margin-left:auto;color:#c5d0df;font-size:12px}
+main{max-width:1100px;margin:34px auto;padding:0 20px 54px}.eyebrow{color:#128d87;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.13em}.hero{display:flex;justify-content:space-between;align-items:flex-start;gap:22px;margin-bottom:24px}.hero h1{font-size:clamp(27px,4vw,38px);letter-spacing:-.035em;line-height:1.13;margin:8px 0 10px;color:var(--navy)}.hero p{margin:0;color:var(--muted);max-width:650px}.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#e7f5f3;color:#147e79;font-size:12px;font-weight:750;white-space:nowrap}.dot{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:18px}.card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 6px 22px #12213a08}.card h2{font-size:17px;margin:0 0 6px;color:var(--navy)}.sub{font-size:13px;color:var(--muted);margin:0 0 18px}.step{display:flex;gap:13px;padding:15px 0;border-top:1px solid var(--line)}.step:first-of-type{border-top:0}.num{height:32px;width:32px;flex:0 0 32px;border-radius:10px;display:grid;place-items:center;background:#e9f6f5;color:#147f7b;font-weight:800;font-size:13px}.step strong{display:block;font-size:14px}.step p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.btn{border:0;border-radius:11px;padding:12px 16px;font:inherit;font-size:13px;font-weight:750;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}.primary{background:var(--navy);color:white}.secondary{background:white;color:var(--navy);border:1px solid var(--line)}.btn:focus-visible,a:focus-visible{outline:3px solid #70d8cf;outline-offset:3px}.btn[aria-disabled=true]{opacity:.55;cursor:not-allowed}
+.status{border:1px solid #f0dfbd;background:#fff9ec;border-radius:13px;padding:13px 14px;color:#75521b;font-size:12px;margin-top:16px}.status strong{display:block;margin-bottom:4px}.fieldlabel{display:block;font-size:12px;font-weight:750;margin:13px 0 6px}.field{width:100%;border:1px solid #d8e0eb;border-radius:10px;padding:11px 12px;font:inherit;font-size:13px;background:#f9fbfd;color:var(--ink)}.field:focus{outline:2px solid #71d5ce;border-color:transparent}.privacy{display:flex;gap:9px;font-size:12px;color:var(--muted);margin-top:16px}.privacy svg{flex:0 0 auto}.list{margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:13px}.list li{margin:8px 0}.foot{margin-top:18px;text-align:center;color:#8591a3;font-size:11px}
+@media(max-width:760px){main{margin-top:24px}.hero{display:block}.pill{margin-top:16px}.layout{grid-template-columns:1fr}.topright{display:none}.card{padding:18px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topinner"><div class="mark" aria-hidden="true">ID</div><div class="brand">INSTITUTO DELYONE<small>Medicina e Tecnologia · MedUnity</small></div><div class="topright">Ambiente de prescrição</div></div></header>
+<main>
+  <div class="hero"><div><div class="eyebrow">MedUnity · módulo clínico</div><h1>Prescrição integrada</h1><p>Prepare a prescrição a partir do atendimento no MedUnity e acesse os serviços oficiais do SNCR quando necessário — com conferência médica antes de qualquer confirmação.</p></div><span class="pill"><span class="dot"></span> Portal independente</span></div>
+  <div class="layout">
+    <section class="card" aria-labelledby="flow-title">
+      <h2 id="flow-title">Fluxo de trabalho</h2><p class="sub">Uma experiência conectada, sem duplicar a ficha do paciente manualmente.</p>
+      <div class="step"><div class="num">01</div><div><strong>Abra a ficha no MedUnity</strong><p>Entre no atendimento correto e use a ação de prescrição para iniciar o fluxo com o contexto clínico autorizado.</p></div></div>
+      <div class="step"><div class="num">02</div><div><strong>Autentique-se no serviço oficial</strong><p>A autenticação ocorre no Gov.br por meio do fluxo oficial. Este portal nunca solicita sua senha Gov.br.</p></div></div>
+      <div class="step"><div class="num">03</div><div><strong>Confira e complete a receita</strong><p>Revise os dados importados, o medicamento, a posologia e os campos exigidos para o tipo de receita antes de confirmar.</p></div></div>
+      <div class="step"><div class="num">04</div><div><strong>Retorne ao MedUnity</strong><p>Após a integração segura ser habilitada, os dados permitidos e o resultado da operação poderão retornar ao atendimento de origem.</p></div></div>
+      <div class="actions"><a class="btn primary" href="https://delyone.com" rel="noopener">Voltar ao MedUnity ↗</a><button class="btn secondary" type="button" id="showStatus">Ver estado da integração</button></div>
+      <div class="status" id="integrationStatus" role="status" aria-live="polite"><strong>Integração em preparação</strong>Esta página é a estrutura inicial. A transferência da ficha-mãe, a autenticação SNCR e o retorno dos dados precisam ser conectados e testados no servidor antes do uso clínico.</div>
+    </section>
+    <aside class="card" aria-labelledby="context-title">
+      <h2 id="context-title">Contexto do atendimento</h2><p class="sub">A ficha-mãe será carregada pelo MedUnity após a integração segura estar disponível.</p>
+      <label class="fieldlabel" for="patientState">Estado da ficha</label><input class="field" id="patientState" value="Aguardando conexão segura com o MedUnity" readonly>
+      <label class="fieldlabel" for="authState">Autenticação SNCR</label><input class="field" id="authState" value="Não iniciada" readonly>
+      <ul class="list"><li>Nenhum dado de paciente é solicitado ou armazenado nesta versão inicial.</li><li>Não são geradas nem reservadas numerações por este HTML.</li><li>O token SNCR não deve ser exposto ao navegador do MedUnity nem transferido entre sistemas.</li></ul>
+      <div class="status"><strong>Segurança clínica</strong>Não use esta versão para emitir receitas reais. A integração oficial e a validação dos dados ainda não estão implementadas.</div>
+    </aside>
+  </div>
+  <div class="foot">Instituto Delyone de Medicina e Tecnologia · Portal SNCR · versão inicial de interface</div>
+</main>
+<script>
+document.getElementById('showStatus').addEventListener('click',function(){
+ const status=document.getElementById('integrationStatus');
+ status.innerHTML='<strong>Próximas integrações necessárias</strong>1. Contrato seguro MedUnity → portal. 2. Fluxo oficial de autenticação SNCR. 3. Consulta conforme manual. 4. Retorno validado ao atendimento. Nenhum dado clínico foi transmitido.';
+});
+</script>
+</body>
+</html>
