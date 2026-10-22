@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b36">
+<title>Teste mínimo de autenticação · SNCRbr</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#17243b;background:#f4f7fb}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px}
+main{width:min(100%,520px);background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:24px;box-shadow:0 8px 28px #10203a0c}
+.brand{font-size:12px;font-weight:800;letter-spacing:.1em;color:#128d87;text-transform:uppercase}
+h1{margin:8px 0;font-size:26px;color:#101b36}p{color:#68768b;font-size:14px;line-height:1.5}
+label{display:block;font-size:13px;font-weight:700;margin:16px 0 6px}
+input{width:100%;padding:12px;border:1px solid #d8e0eb;border-radius:10px;font:inherit}
+button{width:100%;padding:13px 15px;border:0;border-radius:10px;background:#101b36;color:#fff;font:inherit;font-weight:750;margin-top:16px}
+button:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#e9eef5;color:#101b36}
+.status{padding:12px;border-radius:10px;background:#fff8e8;color:#76551a;font-size:13px;margin-top:16px;overflow-wrap:anywhere}
+.status.ok{background:#e8f7f1;color:#176747}.status.err{background:#fff0f0;color:#9b2929}
+small{display:block;color:#68768b;font-size:12px;margin-top:6px}.foot{margin-top:18px;font-size:11px;color:#8490a2}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">Instituto Delyone · MedUnity</div>
+  <h1>Teste mínimo SNCRbr</h1>
+  <p>Escopo desta página: identificar o profissional e, somente após validação real pela API MedUnity, liberar o início da autenticação oficial SNCR. Não emite receitas nem consulta numeração.</p>
+  <form id="professionalForm" novalidate>
+    <label for="name">Nome completo</label>
+    <input id="name" name="name" autocomplete="name" required maxlength="160">
+    <label for="cpf">CPF</label>
+    <input id="cpf" name="cpf" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required>
+    <label for="crm">CRM (número e UF)</label>
+    <input id="crm" name="crm" autocomplete="off" maxlength="24" placeholder="123456 / GO" required>
+    <button id="validateBtn" type="submit">Validar no MedUnity</button>
+  </form>
+  <button id="sncrBtn" class="secondary" type="button" disabled>Entrar no SNCR</button>
+  <div id="status" class="status" role="status" aria-live="polite">Aguardando identificação. Nenhum dado foi enviado.</div>
+  <small>Privacidade: esta página não armazena os campos no navegador. Não informe senha Gov.br nem compartilhe tokens.</small>
+  <div class="foot">Teste em homologação · sem emissão de receitas · sem deploy de produção</div>
+</main>
+<script>
+(() => {
+  "use strict";
+  const form = document.getElementById("professionalForm");
+  const validateBtn = document.getElementById("validateBtn");
+  const sncrBtn = document.getElementById("sncrBtn");
+  const status = document.getElementById("status");
+  // Configure only after confirming the real MedUnity endpoint and request contract.
+  const VALIDATE_URL = window.MEDUNITY_PROFESSIONAL_VALIDATE_URL || "";
+  // This is the backend route, not the public Anvisa API. Never place admin keys here.
+  const SNCR_LOGIN_URL = window.MEDUNITY_SNCR_LOGIN_URL || "";
+
+  function show(message, kind = "") {
+    status.className = "status" + (kind ? " " + kind : "");
+    status.textContent = message;
+  }
+  function normalizeCpf(value) { return value.replace(/\D/g, ""); }
+  function validCpf(value) {
+    const cpf = normalizeCpf(value);
+    if (!/^\d{11}$/.test(cpf) || /^(\d)\1{10}$/.test(cpf)) return false;
+    let sum = 0;
+    for (let i = 0; i < 9; i++) sum += Number(cpf[i]) * (10 - i);
+    let digit = (sum * 10) % 11; if (digit === 10) digit = 0;
+    if (digit !== Number(cpf[9])) return false;
+    sum = 0;
+    for (let i = 0; i < 10; i++) sum += Number(cpf[i]) * (11 - i);
+    digit = (sum * 10) % 11; if (digit === 10) digit = 0;
+    return digit === Number(cpf[10]);
+  }
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    sncrBtn.disabled = true;
+    const name = document.getElementById("name").value.trim();
+    const cpf = normalizeCpf(document.getElementById("cpf").value);
+    const crm = document.getElementById("crm").value.trim().toUpperCase();
+    if (!name || !validCpf(cpf) || !/^\d{3,12}\s*\/\s*[A-Z]{2}$/.test(crm)) {
+      show("Confira nome, CPF válido e CRM no formato número/UF. Nenhuma autenticação foi realizada.", "err");
+      return;
+    }
+    if (!VALIDATE_URL) {
+      show("Campos conferidos localmente, mas a autenticação NÃO foi validada. Falta confirmar e configurar o endpoint real de validação de profissional da API MedUnity; o formulário não simula sucesso.", "err");
+      return;
+    }
+    validateBtn.disabled = true;
+    show("Consultando a API MedUnity…");
+    try {
+      const response = await fetch(VALIDATE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        cache: "no-store",
+        body: JSON.stringify({ nome: name, cpf, crm })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.validated !== true || typeof data.sncrLoginUrl !== "string") {
+        throw new Error("A API não confirmou a identidade do profissional.");
+      }
+      sncrBtn.dataset.loginUrl = data.sncrLoginUrl;
+      sncrBtn.disabled = false;
+      show("Profissional validado pela API MedUnity. Você já pode iniciar a autenticação oficial SNCR.", "ok");
+    } catch {
+      show("Não foi possível validar pela API MedUnity. Nenhum login SNCR foi iniciado.", "err");
+    } finally {
+      validateBtn.disabled = false;
+    }
+  });
+
+  sncrBtn.addEventListener("click", () => {
+    const url = sncrBtn.dataset.loginUrl;
+    if (!url) {
+      show("Login SNCR bloqueado: falta uma validação real da API MedUnity.", "err");
+      return;
+    }
+    try {
+      const target = new URL(url);
+      if (target.protocol !== "https:") throw new Error("HTTPS obrigatório");
+      window.location.assign(target.href);
+    } catch {
+      show("A API retornou uma URL de login inválida. O fluxo não foi iniciado.", "err");
+    }
+  });
+})();
+</script>
+</body>
+</html>
